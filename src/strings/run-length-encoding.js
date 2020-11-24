@@ -12,7 +12,6 @@
   "9A4A2B4C2D"
 */
 
-// AAAAAAAAAAAAABBCCCCDD
 function runLengthEncoding(str) {
   const size = str.length;
   const output = [];
