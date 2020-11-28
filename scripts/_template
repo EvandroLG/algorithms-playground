@@ -1,0 +1,10 @@
+/*
+  {title}
+*/
+
+function {fn_name}() {
+  return true;
+}
+
+const assert = require('assert');
+assert.ok({fn_name}());
