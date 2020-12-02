@@ -8,7 +8,7 @@ function capitalize(str) {
     const firstLetter = cur[0].toUpperCase();
     const rest = cur.slice(1).toLowerCase();
 
-    return `${acc} ${firstLetter}${rest}`;
+    return `${acc}${firstLetter}${rest}`;
   }, '');
 }
 
