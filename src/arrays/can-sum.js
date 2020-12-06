@@ -7,7 +7,11 @@
   Output: true
 */
 
-function canSum(arr, target) {
+function canSum(arr, target, _memo = {}) {
+  if (target in _memo) {
+    return _memo[target];
+  }
+
   if (target === 0) {
     return true;
   }
@@ -18,8 +22,9 @@ function canSum(arr, target) {
 
   for (const value of arr) {
     const remainder = target - value;
+    _memo[target] = canSum(arr, remainder, _memo);
 
-    if (canSum(arr, remainder)) {
+    if (_memo[target]) {
       return true;
     }
   }
@@ -30,3 +35,4 @@ function canSum(arr, target) {
 const assert = require('assert');
 assert.ok(canSum([5, 3, 4, 7], 7));
 assert.ok(!canSum([2, 4], 7));
+assert.ok(!canSum([7, 14], 300));
