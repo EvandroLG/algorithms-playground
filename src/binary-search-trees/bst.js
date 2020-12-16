@@ -24,6 +24,17 @@ class BST {
       return true;
     }
   }
+
+  height(tree = this) {
+    if (!tree) {
+      return -1;
+    }
+
+    const left = this.height(tree.left);
+    const right = this.height(tree.right);
+
+    return 1 + Math.max(left, right);
+  }
 }
 
 module.exports = BST;
