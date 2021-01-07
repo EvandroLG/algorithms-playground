@@ -4,12 +4,15 @@ const fs = require('fs');
 const path = require('path');
 
 function capitalize(str) {
-  return str.split('-').reduce((acc, cur) => {
-    const firstLetter = cur[0].toUpperCase();
-    const rest = cur.slice(1).toLowerCase();
+  return str
+    .split('-')
+    .reduce((acc, cur) => {
+      const firstLetter = cur[0].toUpperCase();
+      const rest = cur.slice(1).toLowerCase();
 
-    return `${acc} ${firstLetter} ${rest}`;
-  }, '');
+      return `${acc}${firstLetter}${rest} `;
+    }, '')
+    .trim();
 }
 
 function fnName(str) {
