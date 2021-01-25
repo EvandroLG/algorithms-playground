@@ -20,7 +20,7 @@ function minimumWaitingTime(queries) {
     return 0;
   }
 
-  const sorted = [...queries].sort((a, b) => a - b);
+  const sorted = queries.slice().sort((a, b) => a - b);
   const times = [];
   let prev = 0;
 
