@@ -40,7 +40,7 @@ function validIpAddresses(value) {
   const output = [];
   const size = value.length;
 
-  for (let i = 0; i < Math.min(value - 1, 4); i++) {
+  for (let i = 1; i < Math.min(value - 1, 4); i++) {
     const first = value.slice(0, i);
 
     if (!isValid(first)) {
