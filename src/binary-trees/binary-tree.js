@@ -6,8 +6,7 @@ class BinaryTree {
   }
 
   insert(value) {
-    const queue = [];
-    queue.push(this);
+    const queue = [this];
 
     while (true) {
       const node = queue.pop();
