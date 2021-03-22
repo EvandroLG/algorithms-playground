@@ -15,20 +15,30 @@ function same(arr1, arr2) {
     return false;
   }
 
-  const set = new Set(arr2);
+  const hash = {};
+  for (const item of arr2) {
+    hash[item] = ++hash[item] || 1;
+  }
 
-  for (const item of arr1) {
-    const square = Math.pow(item, 2);
+  for (const value of arr1) {
+    const square = Math.pow(value, 2);
 
-    if (!set.has(square)) {
+    if (!(square in hash)) {
       return false;
+    }
+
+    if (hash[square] === 1) {
+      delete hash[square];
+    } else {
+      --hash[square];
     }
   }
 
-  return true;
+  return !Object.keys(hash).length;
 }
 
 const assert = require('assert');
 
 assert.ok(same([1, 2, 3], [4, 1, 9]));
 assert.ok(!same([1, 2, 3], [4, 9]));
+assert.ok(!same([1, 2, 1], [4, 4, 1]));
