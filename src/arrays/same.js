@@ -17,7 +17,7 @@ function same(arr1, arr2) {
 
   const hash = {};
   for (const item of arr2) {
-    hash[item] = ++hash[item] || 1;
+    hash[item] = (hash[item] || 0) + 1;
   }
 
   for (const value of arr1) {
