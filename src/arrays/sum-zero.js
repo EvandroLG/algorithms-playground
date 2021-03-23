@@ -6,7 +6,7 @@
   Return an array that includes both values that sum to zero or undefined if a pair does not exist.
 
   Examples:
-  [-3, 2, -1, 0, 1, 2, 3] // [-3, 3]
+  [-3, -2, -1, 0, 1, 2, 3] // [-3, 3]
   [-2, 0, 1, 3] // undefined
 */
 
@@ -30,5 +30,6 @@ function sumZero(arr) {
 }
 
 const assert = require('assert');
-assert.deepEqual(sumZero([-3, 2, -1, 0, 1, 2, 3]), [-3, 3]);
+assert.deepEqual(sumZero([-3, -2, -1, 0, 1, 2, 3]), [-3, 3]);
+assert.deepEqual(sumZero([-9, -6, -3, -2, -1, 0, 1, 2, 6, 10, 13]), [-6, 6]);
 assert.equal(sumZero([-2, 0, 1, 3]), undefined);
