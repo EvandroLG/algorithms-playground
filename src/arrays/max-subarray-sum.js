@@ -13,24 +13,22 @@ function maxSubarraySum(arr, n) {
     return 0;
   }
 
-  let tmp = arr[0];
   let max = 0;
-  let counter = 1;
 
-  for (let i = 1; i < arr.length; i++) {
-    counter = counter + 1;
-    tmp = tmp + arr[i];
+  for (let i = 0; i < n; i++) {
+    max = max + arr[i];
+  }
 
-    if (counter === n) {
-      max = Math.max(tmp, max);
-      counter = 1;
-      tmp = arr[i];
-    }
+  let tmp = max;
+
+  for (let i = n; i < arr.length; i++) {
+    tmp = tmp - arr[i - n] + arr[i];
+    max = Math.max(max, tmp);
   }
 
   return max;
 }
 
 const assert = require('assert');
-assert.ok(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2));
-assert.ok(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4));
+assert.equal(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2), 10);
+assert.equal(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4), 17);
