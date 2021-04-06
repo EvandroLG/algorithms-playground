@@ -20,12 +20,12 @@ function balancedBrakets(str) {
   };
 
   for (const c of str) {
-    if (['(', '[', '{'].includes(c)) {
+    if (Object.keys(hash).includes(c)) {
       stack.push(c);
       continue;
     }
 
-    if ([')', ']', '}'].includes(c) && hash[stack.pop()] !== c) {
+    if (Object.values(hash).includes(c) && hash[stack.pop()] !== c) {
       return false;
     }
   }
