@@ -26,7 +26,7 @@ function generateTags(num) {
       generate(numOfOpenTags, numOfCloseTags - 1, prefix + '</div>', output);
     }
 
-    if (numOfCloseTags === 0) {
+    if (!numOfCloseTags) {
       output.push(prefix);
     }
   })(num, num, '');
