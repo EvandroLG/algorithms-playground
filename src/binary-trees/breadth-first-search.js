@@ -1,7 +1,7 @@
 /*
   Breadth First Search
 
-  Write a function takes in a Binary Tree and returns a list with the values of every node tree in horizontal order.
+  Write a function that takes in a Binary Tree and returns a list with the values of every node tree in horizontal order.
 
   tree =     10
           /     \
