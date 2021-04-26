@@ -41,4 +41,4 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(20);
 
-assert.ok(postOrder(tree), [3, 8, 6, 20, 15, 10]);
+assert.deepEqual(postOrder(tree), [3, 8, 6, 20, 15, 10]);
