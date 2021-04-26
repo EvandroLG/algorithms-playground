@@ -26,11 +26,20 @@ function findSubstring(str, sub) {
     return -1;
   }
 
-  const subSize = sub.length;
+  let p1 = 0;
+  let p2 = 0;
 
-  for (let i = 0; i < str.length; i++) {
-    if (str.slice(i, i + subSize) === sub) {
-      return i;
+  while (p1 < str.length) {
+    if (str[p1] === sub[p2]) {
+      if (p2 === sub.length - 1) {
+        return Math.abs(p1 - (sub.length - 1));
+      }
+
+      p1++;
+      p2++;
+    } else {
+      p1++;
+      p2 = 0;
     }
   }
 
