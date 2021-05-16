@@ -7,32 +7,38 @@
 */
 
 function promiseAll(promises) {
-  const result = [];
+  const results = [];
   let counter = 0;
 
-  function handlePromises(resolve, reject) {
+  function handlePromise(resolve, reject) {
     if (!promises.length) {
       resolve([]);
-      return;
     }
 
-    promises.forEach((promise, index) => {
+    for (let i = 0; i < promises.length; i++) {
+      const promise = promises[i];
+
+      if (!(promise instanceof Promise)) {
+        results[i] = promise;
+        continue;
+      }
+
       promise
-        .then((value) => {
-          result[index] = value;
+        .then((result) => {
+          results[i] = result;
           counter++;
 
           if (counter === promises.length) {
-            resolve(result);
+            resolve(results);
           }
         })
         .catch((e) => {
           reject(e);
         });
-    });
+    }
   }
 
-  return new Promise(handlePromises);
+  return new Promise(handlePromise);
 }
 
 const assert = require('assert');
