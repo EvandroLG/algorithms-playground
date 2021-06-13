@@ -12,9 +12,10 @@
        /    \
       Erick  Evander
 
- users: Dan and Erick
+  users: Dan and Erick
 
- Output:
+  Output:
+  ['Dan', 'Juan', 'Roger', 'Erick']
 */
 
 function getPath(visited, userA, userB) {
