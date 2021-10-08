@@ -22,14 +22,11 @@
 
 function connectedComponentsCount(graph) {
   const visited = new Set();
-  const keys = Object.keys(graph);
-  let count = 0;
 
-  for (const key of keys) {
-    count += traverse(graph, key, visited);
-  }
-
-  return count;
+  return Object.keys(graph).reduce((acc, key) => {
+    acc += traverse(graph, key, visited);
+    return acc;
+  }, 0);
 }
 
 function traverse(graph, key, visited) {
