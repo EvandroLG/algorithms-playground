@@ -31,15 +31,23 @@
   }
 */
 
+function type(obj) {
+  return Object.prototype.toString
+    .call(obj)
+    .split(' ')[1]
+    .slice(0, -1)
+    .toLowerCase();
+}
+
 function flatObject(json) {
   const output = {};
 
   (function flatHelper(obj, normalizedKey = '') {
-    if (Array.isArray(obj)) {
+    if (type(obj) === 'array') {
       obj.forEach((item, idx) => {
         flatHelper(item, `${normalizedKey}${idx}_`);
       });
-    } else if (typeof obj === 'object') {
+    } else if (type(obj) === 'object') {
       const keys = Object.keys(obj);
       keys.forEach((key) => {
         flatHelper(obj[key], `${normalizedKey}${key}_`);
