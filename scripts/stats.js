@@ -26,7 +26,7 @@ function log(value) {
 }
 
 function output(hash) {
-  const keys = Object.keys(hash);
+  const keys = Object.keys(hash).sort((a, b) => hash[b] - hash[a]);
   const topics = keys.filter((key) => key !== 'total');
 
   for (const topic of topics) {
