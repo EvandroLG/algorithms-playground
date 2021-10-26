@@ -33,27 +33,27 @@ function isNodeInCycle(graph, node, visited, inStack) {
 
   for (const neighbor of graph[node]) {
     if (
-      (!visited[neighbor] &&
+      (!visited.hasOwnProperty(neighbor) &&
         isNodeInCycle(graph, neighbor, visited, inStack)) ||
-      inStack[neighbor]
+      inStack.hasOwnProperty(neighbor)
     ) {
       return true;
     }
   }
 
-  inStack[node] = false;
+  delete inStack[node];
 
   return false;
 }
 
 function cycleInGraph(edges) {
   const graph = makeGraph(edges);
-  const visited = Array(edges.length).fill(false);
-  const inStack = Array(edges.length).fill(false);
+  const visited = {};
+  const inStack = {};
   const nodes = Object.keys(graph);
 
   for (const node of nodes) {
-    if (visited[node]) {
+    if (visited.hasOwnProperty(node)) {
       continue;
     }
 
