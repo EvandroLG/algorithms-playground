@@ -24,12 +24,12 @@ function kthSmallestElement(root, k) {
       return;
     }
 
-    arr.push(node.value);
     traverse(node.left);
+    arr.push(node.value);
     traverse(node.right);
   })(root);
 
-  return arr.sort((a, b) => a - b)[k - 1];
+  return arr[k - 1];
 }
 
 const assert = require('assert');
