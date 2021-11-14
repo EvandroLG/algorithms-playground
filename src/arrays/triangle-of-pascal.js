@@ -9,31 +9,30 @@
   Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
 */
 
+function updateArr(above, arr) {
+  if (!above || arr.length <= 2) {
+    return;
+  }
+
+  let p1 = 0;
+  let p2 = 1;
+
+  for (let i = 1; i < arr.length - 1; i++) {
+    arr[i] = above[p1] + above[p2];
+    p1++;
+    p2++;
+  }
+}
+
 function triangleOfPascal(n) {
   const output = [];
-  let lastArr = null;
-  let rows = n;
-  let cols = 1;
+  let rows = 0;
 
-  while (rows) {
-    const arr = Array(cols).fill(1);
-
-    if (cols > 2) {
-      let first = 0;
-      let last = 1;
-
-      for (let i = 1; i < arr.length - 1; i++) {
-        arr[i] = lastArr[first] + lastArr[last];
-        first++;
-        last++;
-      }
-    }
-
+  while (rows < n) {
+    const arr = Array(rows + 1).fill(1);
+    updateArr(output[rows - 1], arr);
     output.push(arr);
-
-    cols++;
-    rows--;
-    lastArr = arr;
+    rows++;
   }
 
   return output;
