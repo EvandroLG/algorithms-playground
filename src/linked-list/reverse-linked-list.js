@@ -12,18 +12,15 @@
   5 -> 4 -> 3 -> 2 -> 1 -> 0 // the new head node with value 5
 */
 
-function reverseLinkedList(head) {
-  let current = head;
-  let prev = null;
-
-  while (current) {
-    const next = current.next;
-    current.next = prev;
-    prev = current;
-    current = next;
+function reverseLinkedList(head, prev) {
+  if (!head) {
+    return prev;
   }
 
-  return prev;
+  const next = head.next;
+  head.next = prev;
+
+  return reverseLinkedList(next, head);
 }
 
 const assert = require('assert');
