@@ -9,30 +9,26 @@
   Output: [2, 2]
 */
 
-function intersectionOfTwoArrays(arr1, arr2) {
-  const [smaller, larger] =
-    arr1.length < arr2.length ? [arr1, arr2] : [arr2, arr1];
-
-  smaller.sort((a, b) => a - b);
-  larger.sort((a, b) => a - b);
-
-  const output = [];
-  let p1 = 0;
-  let p2 = 0;
-
-  while (p1 < smaller.length && p2 < larger.length) {
-    if (smaller[p1] === larger[p2]) {
-      output.push(smaller[p1]);
-      p1++;
-      p2++;
-
-      continue;
+function counter(arr) {
+  return arr.reduce((acc, item) => {
+    if (acc.hasOwnProperty(item)) {
+      acc[item]++;
+    } else {
+      acc[item] = 1;
     }
 
-    if (smaller[p1] > larger[p2]) {
-      p2++;
-    } else {
-      p1++;
+    return acc;
+  }, {});
+}
+
+function intersectionOfTwoArrays(arr1, arr2) {
+  const output = [];
+  const counter2 = counter(arr2);
+
+  for (const item of arr1) {
+    if (counter2.hasOwnProperty(item) && counter2[item] > 0) {
+      output.push(item);
+      counter2[item]--;
     }
   }
 
