@@ -27,6 +27,11 @@ function flat(arr) {
 
 function reshape(arr, r, c) {
   const flatted = flat(arr);
+
+  if (flatted.length !== r * c) {
+    return arr;
+  }
+
   const output = [];
   let tmp = [];
   let rows = 0;
@@ -46,10 +51,6 @@ function reshape(arr, r, c) {
       output.push(tmp);
       tmp = [];
     }
-  }
-
-  if (rows !== r || cols > 0) {
-    return arr;
   }
 
   return output;
