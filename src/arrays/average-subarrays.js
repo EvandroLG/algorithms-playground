@@ -5,7 +5,7 @@
 
   Example:
   Input: [1, 2, 3, 4, 5], 3
-  Output: [6, 9, 12]
+  Output: [2, 3, 4]
 */
 
 function averageSubarrays(arr, target) {
@@ -19,7 +19,7 @@ function averageSubarrays(arr, target) {
     end++;
 
     if (end >= target) {
-      output.push(sum);
+      output.push(sum / target);
       sum -= arr[start];
       start++;
     }
@@ -29,4 +29,4 @@ function averageSubarrays(arr, target) {
 }
 
 const assert = require('assert');
-assert.deepEqual(averageSubarrays([1, 2, 3, 4, 5], 3), [6, 9, 12]);
+assert.deepEqual(averageSubarrays([1, 2, 3, 4, 5], 3), [2, 3, 4]);
