@@ -20,13 +20,10 @@ function sort(arr) {
 
 function mergeOverlappingIntervals(arr) {
   const sortedArray = sort(arr);
-  const size = sortedArray.length;
   const output = [sortedArray[0]];
   let lastItem = output[0];
 
-  for (let i = 1; i < size; i++) {
-    const item = sortedArray[i];
-
+  for (const item of sortedArray) {
     if (lastItem[1] >= item[0]) {
       lastItem[1] = item[1] > lastItem[1] ? item[1] : lastItem[1];
     } else {
