@@ -21,24 +21,19 @@ function sortStr(value) {
 }
 
 function groupAnagrams(arr) {
-  const found = new Map();
-  const output = [];
+  const words = {};
 
-  for (const item of arr) {
-    const sorted = sortStr(item);
+  for (const word of arr) {
+    const sorted = sortStr(word);
 
-    if (found.has(sorted)) {
-      found.get(sorted).push(item);
-    } else {
-      found.set(sorted, [item]);
+    if (!words.hasOwnProperty(sorted)) {
+      words[sorted] = [];
     }
+
+    words[sorted].push(word);
   }
 
-  found.forEach((item) => {
-    output.push(item);
-  });
-
-  return output;
+  return Object.values(words);
 }
 
 const assert = require('assert');
