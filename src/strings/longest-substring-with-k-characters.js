@@ -9,46 +9,34 @@
 */
 
 function longestSubstringWithKCharacters(s, k) {
-  if (!s.length || !k) {
-    return 0;
-  }
-
-  const memo = {
-    [s[0]]: 1,
-  };
-
+  const memo = {};
   let p1 = 0;
   let p2 = 0;
-  let distinctCharacters = 1;
-  let tmpMax = 0;
   let max = 0;
 
   while (p2 < s.length) {
-    if (distinctCharacters <= k) {
-      tmpMax++;
-      max = Math.max(tmpMax, max);
-      p2++;
-    } else {
-      memo[s[p1]]--;
-      tmpMax--;
+    const c = s[p2];
 
-      if (memo[s[p1]] === 0) {
-        distinctCharacters--;
+    if (!memo.hasOwnProperty(c)) {
+      memo[c] = 0;
+    }
+
+    memo[c]++;
+
+    while (Object.keys(memo).length > k) {
+      const start = s[p1];
+      memo[start]--;
+
+      if (!memo[start]) {
+        delete memo[start];
       }
 
       p1++;
-
-      continue;
     }
 
-    const c = s[p2];
+    max = Math.max(max, p2 - p1 + 1);
 
-    if (memo.hasOwnProperty(c) || memo[c] > 0) {
-      memo[c]++;
-    } else {
-      memo[c] = 1;
-      distinctCharacters++;
-    }
+    p2++;
   }
 
   return max;
@@ -58,3 +46,4 @@ const assert = require('assert');
 assert.equal(longestSubstringWithKCharacters('acccpbbebi', 3), 6);
 assert.equal(longestSubstringWithKCharacters('aaaabbccd', 1), 4);
 assert.equal(longestSubstringWithKCharacters('abcdefg', 10), 7);
+assert.equal(longestSubstringWithKCharacters('aba', 1), 1);
