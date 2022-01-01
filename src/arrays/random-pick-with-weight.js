@@ -31,5 +31,20 @@ function randomPickWithWeight(arr) {
 
 const assert = require('assert');
 const randomPick = randomPickWithWeight([1, 3]);
+const arr = [];
 
-assert.equal(randomPick(), 1);
+for (let i = 0; i < 5; i++) {
+  arr.push(randomPick());
+}
+
+const memo = arr.reduce((acc, item) => {
+  if (!acc.hasOwnProperty(item)) {
+    acc[item] = 0;
+  }
+
+  acc[item]++;
+
+  return acc;
+}, {});
+
+assert.ok(memo['0'] < memo['1']);
