@@ -9,24 +9,18 @@
   Output: [2, 1, 4, 3]
 */
 
-function swapNodesInPairs(head, prev = null) {
+function swapNodesInPairs(head) {
   if (!head || !head.next) {
     return head;
   }
 
-  const tmp = head;
-  head = head.next;
-  const next = head.next;
-  head.next = tmp;
-  head.next.next = next;
+  const first = head;
+  const second = head.next;
 
-  if (prev) {
-    prev.next = head;
-  }
+  first.next = swapNodesInPairs(second.next);
+  second.next = first;
 
-  swapNodesInPairs(head.next.next, head.next);
-
-  return head;
+  return second;
 }
 
 const assert = require('assert');
