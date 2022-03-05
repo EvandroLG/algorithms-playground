@@ -12,7 +12,6 @@ function stringToInteger(s) {
   const symbols = new Set(['+', '-']);
   const output = [];
   const fragments = s.trim().split('');
-  const lastIdx = fragments.length - 1;
 
   for (let i = 0; i < s.length; i++) {
     const c = fragments[i];
