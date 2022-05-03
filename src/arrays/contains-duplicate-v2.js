@@ -20,10 +20,8 @@ function containsNearbyDuplicate(nums, k) {
   }, {});
 
   for ([key, indexes] of Object.entries(map)) {
-    if (indexes.length > 1) {
-      if (isValid(indexes, indexes.pop(), k)) {
-        return true;
-      }
+    if (indexes.length > 1 && isValid(indexes, indexes.pop(), k)) {
+      return true;
     }
   }
 
