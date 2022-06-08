@@ -35,6 +35,7 @@ CustomStack.prototype.increment = function (k, val) {
 };
 
 const assert = require('assert');
+
 const stack = new CustomStack(3);
 stack.push(1);
 stack.push(2);
