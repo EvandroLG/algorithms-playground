@@ -1,46 +1,27 @@
 /*
   Shuffle
 
-  Creates an new array shuffled values.
+  Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+  Return the array in the form [x1,y1,x2,y2,...,xn,yn].
 
   Example:
-  shuffle([1, 2, 3, 4]); // [4, 1, 3, 2]
+  Input: [2,5,1,3,4,7], 3
+  Output: [2,3,5,4,1,7]
 */
 
-function swap(arr, i, j) {
-  const tmp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = tmp;
-}
+function shuffle(arr, n) {
+  const output = [];
+  let p1 = 0;
+  let p2 = n;
 
-function shuffle(arr) {
-  const result = arr.slice();
-  let index = arr.length;
-
-  while (index > 0) {
-    const randomIdx = Math.floor(Math.random() * index);
-    index--;
-    swap(result, index, randomIdx);
+  while (p2 < arr.length) {
+    output.push(arr[p1], arr[p2]);
+    p1++;
+    p2++;
   }
 
-  return result;
+  return output;
 }
 
 const assert = require('assert');
-
-const arr = [1, 2, 3, 4];
-const shuffled = shuffle(arr);
-
-function compare(arr1, arr2) {
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-assert.equal(arr.length, shuffled.length);
-assert.ok(!compare(arr, shuffled));
-assert.deepEqual(arr.sort(), shuffled.sort());
+assert.deepEqual(shuffle([2, 5, 1, 3, 4, 7], 3), [2, 3, 5, 4, 1, 7]);
