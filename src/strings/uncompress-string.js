@@ -14,7 +14,6 @@ function uncompressString(str) {
   const numberStack = [];
   const stringStack = [];
   const currentString = [];
-  let k = 1;
 
   for (let i = 0; i < str.length; i++) {
     const c = str[i];
@@ -27,9 +26,9 @@ function uncompressString(str) {
         i++;
       }
 
-      k = +digit.join('');
-    } else if (c === '(') {
+      const k = +digit.join('');
       numberStack.push(k);
+    } else if (c === '(') {
       stringStack.push(currentString.join(''));
       currentString.length = 0;
     } else if (c === ')') {
