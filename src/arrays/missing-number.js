@@ -3,21 +3,35 @@
 
   Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
 
-  Input: [3, 0, 1]
+  Example:
+  Input: [3,0,1]
   Output: 2
 */
 
 function missingNumber(arr) {
-  const memo = new Set(arr);
-  const size = arr.length;
+  let i = 0;
 
-  for (let i = 0; i < size; i++) {
-    if (!memo.has(i)) {
+  while (i < arr.length) {
+    if (arr[i] !== i && arr[i] < arr.length) {
+      swap(arr, i, arr[i]);
+    } else {
+      i++;
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== i) {
       return i;
     }
   }
 
-  return size;
+  return arr.length;
+}
+
+function swap(arr, i, j) {
+  const tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
 }
 
 const assert = require('assert');
