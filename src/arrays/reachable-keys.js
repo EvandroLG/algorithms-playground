@@ -26,29 +26,24 @@ function reachableKeys(n) {
     }
 
     const output = [];
+    const delta = [-2, -1, 1, 2];
 
-    if (dialer[rowIdx + 1]?.[colIdx + 2] !== undefined) {
-      output.push(dialer[rowIdx + 1][colIdx + 2]);
-    }
+    for (const rowMove of delta) {
+      for (const colMove of delta) {
+        if (Math.abs(rowMove) == Math.abs(colMove)) {
+          continue;
+        }
 
-    if (dialer[rowIdx - 1]?.[colIdx + 2] !== undefined) {
-      output.push(dialer[rowIdx - 1][colIdx + 2]);
-    }
-
-    if (dialer[rowIdx + 1]?.[colIdx - 2] !== undefined) {
-      output.push(dialer[rowIdx + 1][colIdx - 2]);
-    }
-
-    if (dialer[rowIdx + 2]?.[colIdx + 1] !== undefined) {
-      output.push(dialer[rowIdx + 2][colIdx + 1]);
-    }
-
-    if (dialer[rowIdx - 2]?.[colIdx + 1] !== undefined) {
-      output.push(dialer[rowIdx - 2][colIdx + 1]);
-    }
-
-    if (dialer[rowIdx + 2]?.[colIdx - 1] !== undefined) {
-      output.push(dialer[rowIdx + 2][colIdx - 1]);
+        if (
+          rowIdx + rowMove >= 0 &&
+          rowIdx + rowMove <= 3 &&
+          colIdx + colMove >= 0 &&
+          colIdx + colMove <= 2 &&
+          dialer[rowIdx + rowMove][colIdx + colMove] !== undefined
+        ) {
+          output.push(dialer[rowIdx + rowMove][colIdx + colMove]);
+        }
+      }
     }
 
     return output;
