@@ -20,13 +20,13 @@ function findMatrix(arr) {
     const idx = findIdx(output, item);
 
     if (idx === -1) {
-      output.push([item]);
+      output.push(new Set([item]));
     } else {
-      output[idx].push(item);
+      output[idx].add(item);
     }
   }
 
-  return output;
+  return output.map((set) => Array.from(set));
 }
 
 function findIdx(arr, item) {
@@ -34,11 +34,11 @@ function findIdx(arr, item) {
   let idx = -1;
 
   for (let i = 0; i < arr.length; i++) {
-    const list = arr[i];
+    const set = arr[i];
 
-    if (!list.includes(item) && list.length < size) {
+    if (!set.has(item) && set.size < size) {
       idx = i;
-      size = list.length;
+      size = set.size;
     }
   }
 
