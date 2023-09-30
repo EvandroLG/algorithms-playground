@@ -9,33 +9,38 @@
   Output: true
 */
 
-function canJump(nums, index = 0, memo = {}) {
-  if (memo[index]) {
-    return false;
-  }
+function canJump(arr) {
+  const lastIndex = arr.length - 1;
+  const memo = {};
 
-  if (index >= nums.length) {
-    return false;
-  }
-
-  if (index === nums.length - 1) {
-    return true;
-  }
-
-  let jump = nums[index];
-
-  while (jump) {
-    const nextIndex = nums[index + jump];
-    if (canJump(nums, nextIndex, memo)) {
+  return (function helper(index) {
+    if (index === lastIndex) {
       return true;
     }
 
-    memo[nextIndex] = true;
+    if (index > lastIndex || !arr[index]) {
+      return false;
+    }
 
-    jump--;
-  }
+    if (memo.hasOwnProperty(index)) {
+      return memo[index];
+    }
 
-  return false;
+    let jump = arr[index];
+
+    while (jump) {
+      const nextIndex = index + jump;
+      memo[nextIndex] = helper(nextIndex);
+
+      if (memo[nextIndex]) {
+        return true;
+      }
+
+      jump--;
+    }
+
+    return false;
+  })(0);
 }
 
 const assert = require('assert');
