@@ -11,21 +11,21 @@
 */
 
 function numberOfSpecialSubstrings(s) {
+  const map = {};
   let counter = 0;
+  let p1 = 0;
+  let p2 = 0;
 
-  for (let i = 0; i < s.length; i++) {
-    const memo = new Set();
+  while (p2 < s.length) {
+    const c = s[p2];
 
-    for (let j = i; j < s.length; j++) {
-      const c = s[j];
-
-      if (memo.has(c)) {
-        break;
-      }
-
-      memo.add(c);
-      counter++;
+    if (map.hasOwnProperty(c) && map[c] >= p1) {
+      p1 = map[c] + 1;
     }
+
+    map[c] = p2;
+    counter += p2 - p1 + 1;
+    p2++;
   }
 
   return counter;
