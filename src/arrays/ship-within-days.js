@@ -16,11 +16,11 @@ function shipWithinDays(weights, days) {
   let left = max;
   let right = total;
 
-  while (left < right) {
+  while (left <= right) {
     const middle = Math.floor((left + right) / 2);
 
     if (isFeasible(weights, middle, days)) {
-      right = middle;
+      right = middle - 1;
     } else {
       left = middle + 1;
     }
