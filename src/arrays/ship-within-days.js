@@ -11,8 +11,7 @@
 
 function shipWithinDays(weights, days) {
   const total = weights.reduce((acc, weight) => acc + weight);
-  const sorted = weights.slice().sort((a, b) => a - b);
-  const max = sorted.at(-1);
+  const max = Math.max(...weights);
 
   let left = max;
   let right = total;
