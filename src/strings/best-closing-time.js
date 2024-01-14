@@ -15,57 +15,33 @@
 */
 
 function bestClosingTime(customers) {
-  const [time] = bestClosingTimeHelper(customers, 0);
-  return time;
-}
+  let currentPenalty = 0;
 
-function bestClosingTimeHelper(customers, closeTime) {
-  const result1 = penalties(customers, closeTime);
-
-  if (closeTime === customers.length) {
-    return result1;
-  }
-
-  const result2 = bestClosingTimeHelper(customers, closeTime + 1);
-
-  if (result1[1] === result2[1]) {
-    if (result1[0] < result2[0]) {
-      return result1;
+  for (const c of customers) {
+    if (c === 'Y') {
+      currentPenalty++;
     }
-
-    return result2;
   }
 
-  if (result1[1] < result2[1]) {
-    return result1;
-  }
-
-  return result2;
-}
-
-function penalties(customers, closeTime) {
-  let penalties = 0;
-  const mapCloseTime = {
-    Y: 1,
-    N: 0,
-  };
-
-  const mapOpenTime = {
-    Y: 0,
-    N: 1,
-  };
+  let min = currentPenalty;
+  let earliest = 0;
 
   for (let i = 0; i < customers.length; i++) {
     const c = customers[i];
 
-    if (closeTime <= i) {
-      penalties += mapCloseTime[c];
+    if (c === 'Y') {
+      currentPenalty--;
     } else {
-      penalties += mapOpenTime[c];
+      currentPenalty++;
+    }
+
+    if (currentPenalty < min) {
+      min = currentPenalty;
+      earliest = i + 1;
     }
   }
 
-  return [closeTime, penalties];
+  return earliest;
 }
 
 const assert = require('assert');
