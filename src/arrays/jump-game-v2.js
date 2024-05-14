@@ -11,31 +11,23 @@
 */
 
 function jumpGameV2(arr) {
-  const lastIndex = arr.length - 1;
-  let minimumJumps = Infinity;
+  let steps = 0;
+  let left = 0;
+  let right = 0;
 
-  function helper(index, currentJumps) {
-    let jump = arr[index];
+  while (right < arr.length - 1) {
+    let farthest = 0;
 
-    while (jump) {
-      const nextIndex = index + jump;
-
-      if (nextIndex === lastIndex) {
-        minimumJumps = Math.min(currentJumps + 1, minimumJumps);
-        break;
-      }
-
-      if (nextIndex < lastIndex) {
-        helper(nextIndex, currentJumps + 1);
-      }
-
-      jump--;
+    for (let i = left; i <= right; i++) {
+      farthest = Math.max(farthest, i + arr[i]);
     }
+
+    left = right + 1;
+    right = farthest;
+    steps++;
   }
 
-  helper(0, 0);
-
-  return minimumJumps === Infinity ? 0 : minimumJumps;
+  return steps;
 }
 
 const assert = require('assert');
