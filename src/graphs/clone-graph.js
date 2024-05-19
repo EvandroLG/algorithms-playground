@@ -29,6 +29,8 @@ function traverse(node, visited) {
     cloneNode.neighbors.push(traverse(neighbor, visited));
   }
 
+  console.log('cloneNode', cloneNode);
+
   return cloneNode;
 }
 
