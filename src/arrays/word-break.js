@@ -9,24 +9,26 @@
 */
 
 function wordBreak(s, wordDict) {
-  return (function helper(currentString, i) {
-    if (currentString === s) {
+  const memo = {};
+
+  return (function helper(idx = 0) {
+    if (idx >= s.length) {
       return true;
     }
 
-    if (currentString.length >= s.length) {
-      return false;
-    }
-
-    for (let j = 0; j < wordDict.length; j++) {
-      const concat = currentString + wordDict[j];
-      if (helper(concat, j)) {
-        return true;
+    if (!memo.hasOwnProperty(idx)) {
+      for (let i = idx + 1; i <= s.length; i++) {
+        if (wordDict.includes(s.slice(idx, i)) && helper(i)) {
+          memo[idx] = true;
+          return memo[idx];
+        }
       }
+
+      memo[idx] = false;
     }
 
-    return false;
-  })('', 0);
+    return memo[idx];
+  })();
 }
 
 const assert = require('assert');
