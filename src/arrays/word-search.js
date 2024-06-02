@@ -2,7 +2,8 @@
   Word Search
 
   Given an m x n grid of characters board and a string word, return true if word exists in the grid.
-  The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+  The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring.
+  The same letter cell may not be used more than once.
 
   Example:
   Input: [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED"
@@ -10,39 +11,56 @@
 */
 
 function wordSearch(board, word) {
-  const backtrack = (row, col, suffix = word, memo = new Set()) => {
-    if (!suffix.length) {
-      return true;
-    }
+  function hasMatch(i, j, s, memo) {
+    const key = `${i}-${j}`;
 
-    const rowInbounce = row >= 0 && row < board.length;
-    const colInbounce = col >= 0 && col < board[0].length;
-    const key = `${row},${col}`;
-
-    if (
-      !rowInbounce ||
-      !colInbounce ||
-      memo.has(key) ||
-      suffix[0] !== board[row][col]
-    ) {
+    if (memo.has(key)) {
       return false;
     }
 
     memo.add(key);
-    const arr = Array.from(memo);
 
-    const left = backtrack(row, col - 1, suffix.slice(1), new Set(arr));
-    const right = backtrack(row, col + 1, suffix.slice(1), new Set(arr));
-    const up = backtrack(row - 1, col, suffix.slice(1), new Set(arr));
-    const down = backtrack(row + 1, col, suffix.slice(1), new Set(arr));
+    if (s === word) {
+      return true;
+    }
 
-    return left || right || up || down;
-  };
+    const nextCharacter = word[s.length];
 
-  for (let row = 0; row < board.length; row++) {
-    for (let col = 0; col < board[0].length; col++) {
-      if (backtrack(row, col)) {
+    if (i > 0 && board[i - 1][j] === nextCharacter) {
+      if (hasMatch(i - 1, j, s + nextCharacter, memo)) {
         return true;
+      }
+    }
+
+    if (i < board.length - 1 && board[i + 1][j] === nextCharacter) {
+      if (hasMatch(i + 1, j, s + nextCharacter, memo)) {
+        return true;
+      }
+    }
+
+    if (j > 0 && board[i][j - 1] === nextCharacter) {
+      if (hasMatch(i, j - 1, s + nextCharacter, memo)) {
+        return true;
+      }
+    }
+
+    if (j < board[0].length - 1 && board[i][j + 1] === nextCharacter) {
+      if (hasMatch(i, j + 1, s + nextCharacter, memo)) {
+        return true;
+      }
+    }
+
+    memo.delete(key);
+
+    return false;
+  }
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      if (word[0] === board[i][j]) {
+        if (hasMatch(i, j, word[0], new Set())) {
+          return true;
+        }
       }
     }
   }
