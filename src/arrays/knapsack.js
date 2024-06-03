@@ -15,13 +15,13 @@ n
 */
 
 function knapsack(capacity, weights, values) {
-  const memo = {};
+  const memo = Array.from({ length: weights.length + 1 }, () => {
+    return Array(capacity + 1).fill(-1);
+  });
 
   return (function helper(currCapacity, n) {
-    const key = `${currCapacity}-${n}`;
-
-    if (memo.hasOwnProperty(key)) {
-      return memo[key];
+    if (memo[n][currCapacity] !== -1) {
+      return memo[n][currCapacity];
     }
 
     if (!currCapacity || !n) {
@@ -29,15 +29,15 @@ function knapsack(capacity, weights, values) {
     }
 
     if (weights[n - 1] <= currCapacity) {
-      memo[key] = Math.max(
+      memo[n][currCapacity] = Math.max(
         values[n - 1] + helper(currCapacity - weights[n - 1], n - 1),
         helper(currCapacity, n - 1)
       );
     } else {
-      memo[key] = helper(currCapacity, n - 1);
+      memo[n][currCapacity] = helper(currCapacity, n - 1);
     }
 
-    return memo[key];
+    return memo[n][currCapacity];
   })(capacity, weights.length);
 }
 
