@@ -10,30 +10,19 @@
 */
 
 function combinations(n, k) {
-  const arr = generateArray(n);
   const output = [];
 
-  (function backtrack(result = [], idx = 0) {
+  (function backtrack(result = [], startIdx = 1) {
     if (result.length === k) {
       output.push(result);
     } else {
-      for (let i = idx; i < arr.length; i++) {
-        result.push(arr[i]);
+      for (let i = startIdx; i <= n; i++) {
+        result.push(i);
         backtrack(result.slice(), i + 1);
         result.pop();
       }
     }
   })();
-
-  return output;
-}
-
-function generateArray(n) {
-  const output = [];
-
-  for (let i = 1; i <= n; i++) {
-    output.push(i);
-  }
 
   return output;
 }
