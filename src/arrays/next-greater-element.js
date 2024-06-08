@@ -12,28 +12,23 @@
 */
 
 function nextGreaterElement(arr1, arr2) {
-  const output = [];
-  const memo = arr2.reduce((acc, item, idx) => {
+  const map = arr1.reduce((acc, item, idx) => {
     acc[item] = idx;
     return acc;
   }, {});
 
-  for (const item of arr1) {
-    let currentIdx = memo[item] + 1;
-    let wasUpdated = false;
+  const output = Array(arr1.length).fill(-1);
+  const stack = [];
 
-    while (currentIdx < arr2.length) {
-      if (arr2[currentIdx] > item) {
-        output.push(arr2[currentIdx]);
-        wasUpdated = true;
-        break;
-      }
-
-      currentIdx++;
+  for (const current of arr2) {
+    while (stack.length && current > stack.at(-1)) {
+      const value = stack.pop();
+      const idx = map[value];
+      output[idx] = current;
     }
 
-    if (!wasUpdated) {
-      output.push(-1);
+    if (map.hasOwnProperty(current)) {
+      stack.push(current);
     }
   }
 
