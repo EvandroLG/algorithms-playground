@@ -14,13 +14,13 @@
 
 function theMaze(maze, start, destination) {
   const WALL = 1;
+  const memo = new Set();
   const directions = [
     [0, 1],
     [0, -1],
     [1, 0],
     [-1, 0],
   ];
-  const memo = new Set();
 
   function isValid(row, col) {
     if (row < 0 || col < 0) {
