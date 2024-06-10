@@ -12,14 +12,30 @@
 */
 
 function findPeakElement(arr) {
-  const sorted = arr.slice().sort((a, b) => a - b);
-  const lastItem = sorted[sorted.length - 1];
-  const indexes = arr.reduce((acc, item, idx) => {
-    acc[item] = idx;
-    return acc;
-  }, {});
+  if (nums.length === 1) {
+    return 0;
+  }
 
-  return indexes[lastItem];
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    const middle = Math.floor((left + right) / 2);
+    const back = nums[middle - 1] ?? -Infinity;
+    const forward = nums[middle + 1] ?? -Infinity;
+
+    if (nums[middle] > forward && nums[middle] > back) {
+      return middle;
+    }
+
+    if (forward > nums[middle]) {
+      left = middle + 1;
+    } else {
+      right = middle - 1;
+    }
+  }
+
+  return -1;
 }
 
 const assert = require('assert');
