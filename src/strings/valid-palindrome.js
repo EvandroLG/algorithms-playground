@@ -30,8 +30,8 @@ function isPalindrome(s, i, j) {
       return false;
     }
 
-    p1++;
-    p2--;
+    i++;
+    j--;
   }
 
   return true;

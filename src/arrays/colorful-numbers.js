@@ -38,6 +38,7 @@ function colorfulNumbers(n) {
 }
 
 const assert = require('assert');
+
 assert.ok(colorfulNumbers(3245));
 assert.ok(colorfulNumbers(23));
 assert.ok(colorfulNumbers(987));

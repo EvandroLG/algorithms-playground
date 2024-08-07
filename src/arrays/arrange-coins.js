@@ -17,7 +17,7 @@ function arrangeCoins() {
   while (n) {
     counter++;
     i++;
-    n = n - (i);
+    n = n - i;
     if (n < 0) {
       return counter - 1;
     }

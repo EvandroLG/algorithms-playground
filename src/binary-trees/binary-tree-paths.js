@@ -37,11 +37,11 @@ const tree = {
     value: 2,
     right: {
       value: 5,
-    }
+    },
   },
   right: {
-    value: 3
-  }
+    value: 3,
+  },
 };
 
 assert.deepEqual(binaryTreePaths(tree), ['1->2->5', '1->3']);

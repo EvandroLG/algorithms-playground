@@ -1,11 +1,20 @@
 {
   "scripts": {
     "newFile": "node scripts/new-file.js",
-    "stats": "node scripts/stats.js"
+    "stats": "node scripts/stats.js",
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write 'src/**/*.{js,ts,json,md}'",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "devDependencies": {
-    "eslint": "^7.14.0",
-    "prettier": "^2.2.0"
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint": "^8.57.0",
+    "prettier": "^2.2.0",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "@types/node": "^14.14.9"
