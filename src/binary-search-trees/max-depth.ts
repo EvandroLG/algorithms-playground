@@ -9,7 +9,7 @@
   Output: 3
 */
 
-import { deepStrictEqual, strictEqual } from 'assert';
+import { strictEqual } from 'assert';
 
 type TreeNode<T> = {
   value: T;
