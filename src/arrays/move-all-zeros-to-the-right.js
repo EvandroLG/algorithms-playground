@@ -11,15 +11,18 @@
 */
 
 function moveAllZerosToTheRight(arr) {
-  let last = 0;
+  let p1 = 0;
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] !== 0) {
-      const tmp = arr[last];
-      arr[last] = arr[i];
-      arr[i] = tmp;
-      last++;
+  for (let p2 = 0; p2 < arr.length; p2++) {
+    if (arr[p2] !== 0) {
+      arr[p1] = arr[p2];
+      p1++;
     }
+  }
+
+  while (p1 < arr.length) {
+    arr[p1] = 0;
+    p1++;
   }
 }
 
