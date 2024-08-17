@@ -13,28 +13,22 @@
   Output: [1]
 */
 
-function normalize(value) {
-  return value !== undefined ? value : Infinity;
-}
-
 function mergeSortedArray(arr1, m, arr2, n) {
-  const copied = arr1.slice();
-  copied.length = m;
-  let p1 = 0;
-  let p2 = 0;
-  let p = 0;
+  let p1 = m - 1;
+  let p2 = n - 1;
+  let p3 = arr1.length - 1;
 
-  while (p < m + n) {
-    if (normalize(copied[p1]) >= normalize(arr2[p2])) {
-      arr1[p] = arr2[p2++];
+  while (p3 >= 0) {
+    if (p1 >= 0 && p2 >= 0) {
+      arr1[p3] = arr1[p1] > arr2[p2] ? arr1[p1--] : arr2[p2--];
+    } else if (p1 >= 0) {
+      arr1[p3] = arr1[p1--];
     } else {
-      arr1[p] = copied[p1++];
+      arr1[p3] = arr2[p2--];
     }
 
-    p++;
+    p3--;
   }
-
-  return arr1;
 }
 
 const assert = require('assert');
@@ -42,4 +36,5 @@ const assert = require('assert');
 const a = [1, 2, 3, 0, 0, 0];
 const b = [2, 5, 6];
 
-assert.deepEqual(mergeSortedArray(a, 3, b, 3), [1, 2, 2, 3, 5, 6]);
+mergeSortedArray(a, 3, b, 3);
+assert.deepEqual(a, [1, 2, 2, 3, 5, 6]);
