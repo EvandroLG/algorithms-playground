@@ -1,50 +1,26 @@
 /*
   Largest Number
 
-  You are given an integer array nums where the largest integer is unique.
-  Determine whether the largest element in the array is at least twice as much as every other number in the array.
-  If it is, return the index of the largest element, or return -1 otherwise.
+  Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.
+  Since the result may be very large, so you need to return a string instead of an integer.
 
   Example:
-  Input: [3,6,1,0]
-  Output: 1
+  Input: [3,30,34,5,9]
+  Output: "9534330"
 */
 
 function largestNumber(arr) {
-  const [valueLargest, index] = getLargestValue(arr);
-  const valueSecondLargest = getSecondLargestValue(arr, index);
+  const s = arr.map(String);
+  const sorted = s.sort((a, b) => (b + a).localeCompare(a + b));
 
-  if (valueLargest >= valueSecondLargest * 2) {
-    return index;
-  }
+  const result = sorted.join('');
 
-  return -1;
-}
-
-function getLargestValue(arr) {
-  const result = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    const value = arr[i];
-
-    if (!result.length || value > result[0]) {
-      result[0] = value;
-      result[1] = i;
-    }
+  if (result[0] === '0') {
+    return '0';
   }
 
   return result;
 }
 
-function getSecondLargestValue(arr, index) {
-  return arr.reduce((acc, item, idx) => {
-    if (idx === index) {
-      return acc;
-    }
-
-    return Math.max(acc, item);
-  }, -Infinity);
-}
-
 const assert = require('assert');
-assert.strictEqual(largestNumber([3, 6, 1, 0]), 1);
+assert.equal(largestNumber([3, 30, 34, 5, 9]), '9534330');
